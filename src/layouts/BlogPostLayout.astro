@@ -1,0 +1,14 @@
+---
+import Layout from './Layout.astro'
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title + " - blog | rhp"}>
+    <main class=' py-10 mt-8 px-2'>
+        <article class="prose prose-slate dark:prose-invert prose-h1:text-[color:var(--secondary-text-color)] prose-xl prose-h2:text-[color:var(--secondary-text-color)] prose-h2:opacity-80 prose-h3:text-[color:var(--secondary-text-color)] prose-h3:opacity-70 prose-blockquote:text-[color:var(--secondary-text-color)] prose-blockquote:opacity-50 prose-h4:text-[color:var(--secondary-text-color)] prose-h4:opacity-70 dark:prose-h2:opacity-[0.98] dark:prose-h3:opacity-[0.90] dark:prose-h4:opacity-[0.90] max-w-none w-[100%]">
+            <h1>{frontmatter.title}</h1>
+            <h2>{frontmatter.subtitle}</h2>
+            <p className=' opacity-50 text-lg'>{frontmatter.date}</p>
+            <slot />
+        </article>
+    </main>
+</Layout>

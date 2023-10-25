@@ -5,33 +5,36 @@ interface Props {
 	href: string;
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, description, date } = Astro.props;
 ---
 
-<li class="link-card">
+<li class="link-card  shadow-md hover:shadow-lg">
 	<a href={href}>
+		<p class=' text-xs opacity-50 pb-2'>
+			{date}
+		</p>
 		<h2>
 			{title}
-			<span>&rarr;</span>
 		</h2>
-		<p>
-			{body}
+		<p class='desc text-base opacity-70'>
+			{description}
 		</p>
 	</a>
 </li>
 <style>
 	.link-card {
+		min-height: 11rem;
 		list-style: none;
 		display: flex;
 		padding: 1px;
-		background-color: #23262d;
+		background-color: #1E202D;
 		background-image: none;
 		background-size: 400%;
 		border-radius: 7px;
 		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+		transition: background-position 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 	}
+	
 	.link-card > a {
 		width: 100%;
 		text-decoration: none;
@@ -48,14 +51,47 @@ const { href, title, body } = Astro.props;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	p {
+		transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 		margin-top: 0.5rem;
 		margin-bottom: 0;
 	}
-	.link-card:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
+	@media (prefers-color-scheme: dark) {
+		.link-card:is(:hover, :focus-within) {
+			background-position: 0;
+			background-image: var(--accent-gradient);
+		}
+		.link-card {
+			box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+		}
 	}
 	.link-card:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
+		color: var(--text-highlight-color);
+	}
+
+	@media (prefers-color-scheme: light) {
+		.link-card {
+			background-color: #444444;
+
+		}
+		.link-card:is(:hover, :focus-within) {
+			background-color: var(--primary-color);
+		}
+		.link-card > a {
+			background-color: inherit;
+		}
+		
+		.link-card:is(:hover, :focus-within) h2 {
+			color: var(--secondary-text-color);
+			font-weight: 500;
+		}
+
+		.link-card:is(:hover, :focus-within) p {
+			opacity: 1;
+		}
+
+	}
+
+	.link-card:is(:hover, :focus-within) p.desc {
+		opacity: 1;
 	}
 </style>

@@ -10,6 +10,27 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.3.2"
+    "@astrojs/react": "^3.0.3",
+    "@astrojs/starlight": "^0.11.1",
+    "@astrojs/tailwind": "^5.0.2",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource-variable/roboto-flex": "^5.0.8",
+    "@fontsource/barlow": "^5.0.8",
+    "@fontsource/barlow-condensed": "^5.0.8",
+    "@fontsource/barlow-semi-condensed": "^5.0.15",
+    "@legendapp/state": "^1.11.1",
+    "@types/react": "^18.2.29",
+    "@types/react-dom": "^18.2.14",
+    "astro": "^3.3.2",
+    "isomorphic-dompurify": "^1.9.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
+    "@emotion/babel-plugin": "^11.11.0",
+    "@tailwindcss/typography": "^0.5.10"
   }
 }

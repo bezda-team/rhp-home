@@ -1,9 +1,13 @@
 ---
+import '@fontsource-variable/roboto-flex';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 interface Props {
 	title: string;
+	classString?: string;
 }
 
-const { title } = Astro.props;
+const { title, classString="mx-auto max-w-3xl min-w-[400px] px-4" } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,27 +20,166 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
+	<body class='w-full'>
+		<div class={classString}>
+			<Header />
+			<slot />
+			<Footer />
+		</div>
 	</body>
 </html>
 <style is:global>
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	@layer base {
+		html {
+			font-family: 'Roboto Flex Variable', system-ui, sans-serif;
+		}
+
+		header, footer {
+			font-family: 'Barlow', system-ui, sans-serif;
+		}
+
+		header .logo {
+			font-family: 'Barlow Semi Condensed', system-ui, sans-serif;
+			font-weight: 300;
+		}
+	}
+
+	:root {
+		--background-color: #ffffff;
+		--primary-color: #f2cc8f;
+		--secondary-color: #3d405b;
+		--secondary-background-color: #f6e05e;
+		--text-color: #000000bb;
+		--secondary-text-color: #3d405b;
+		--contrast-text-color: #ffffffdd;
+		--special-text-color: #73626E;
+		--text-highlight-color: #f2cc8f;
+		--foreground-rgb: 0, 0, 0;
+		--background-start-rgb: 255, 255, 255;
+		--background-end-rgb: 255, 255, 255;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--background-color: #3d405b;
+			--primary-color: #f2cc8f;
+			--secondary-color: #ffffff;
+			--secondary-background-color: #f6e05e;
+			--text-color: #ffffffdd;
+			--secondary-text-color: #ffffff;
+			--contrast-text-color: #000000bb;
+			--special-text-color: #73626E;
+			--text-highlight-color: #f2cc8f;
+			--foreground-rgb: 255, 255, 255;
+			--background-start-rgb: 33, 120, 103;
+			--background-end-rgb: 33, 120, 103;
+		}
+
+		pre {
+   			background-color: rgba(0, 0, 0, 0.5)!important;
+		}
+	}
+
 	:root {
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101;
 		--accent-gradient: linear-gradient(
 			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
+			var(--background-color) 24%,
+			var(--primary-color) 60%
 		);
 	}
-	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
+
+	@media (prefers-color-scheme: light) {
+
+		pre::-webkit-scrollbar-thumb {
+			background-color: #ffffffcc;
+		}
+
+		pre::-moz-scrollbar-thumb {
+			background-color: #ffffffcc;
+		}
+
 	}
+
+	/* Styling the scrollbar in Chrome */
+	::-webkit-scrollbar {
+		width: 8px;
+		height:8px;
+		opacity: 0.4;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: var(--secondary-text-color);
+	}
+	::-webkit-scrollbar-track {
+		opacity: 0;
+	}
+	pre::-webkit-scrollbar {
+		padding-left: 2px;
+		padding-right: 2px;
+	}
+
+	/* Styling the scrollbar in Firefox */
+	::-moz-scrollbar {
+		width: 8px;
+		height:8px;
+		opacity: 0.4;
+	}
+	::-moz-scrollbar-thumb {
+		background-color: var(--secondary-text-color);
+	}
+	::-moz-scrollbar-track {
+		opacity: 0;
+	}
+	pre::-moz-scrollbar {
+		margin-left: 2px;
+		margin-right: 2px;
+	}
+
+	body {
+		color: var(--text-color);
+		background-color: var(--background-color);
+		scrollbar-gutter: stable;
+	}
+
+	a:hover {
+		color: var(--text-highlight-color);
+		text-decoration: underline;
+		text-underline-offset: 0.3em;
+	}
+
+	.top-bar.nav {
+		background-color: var(--background-color);
+		margin-left: -1px;
+		color: var(--text-highlight-color)
+		/* background: linear-gradient(
+			to bottom,
+			rgb(var(--background-end-rgb)),
+			rgb(var(--background-end-rgb),0.97)
+		);
+		backdrop-filter: blur(10px); */
+	}
+
+	.svg-icon {
+		fill: var(--text-color);
+	}
+	.svg-icon:hover {
+		fill: var(--text-highlight-color);
+	}
+
+	main {
+		overflow: hidden;
+	}
+
+	pre {
+   		background-color: #2b2e41!important;
+	}
+
 	code {
 		font-family:
 			Menlo,
